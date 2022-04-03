@@ -14,14 +14,14 @@ public abstract class JsonParser {
 	/**
 	 * Expects the json string to start with an object.
 	 * @param in
+	 * @param endOfMessage The parser stops when the last line is equal to this. Useful for network streams that would otherwise run indefinitely. Replace with null to disable.
 	 * @return
 	 * @throws IOException
 	 */
-	public static JsonObject parseObjectFromStream(BufferedReader in) throws IOException {
-		filePathForErrorHandling.set("stream");
-		//try to gather the full message (end indicated by a emptyline)
+	public static JsonObject parseObjectFromBufferedReader(BufferedReader in, String endOfMessage) throws IOException {
+		filePathForErrorHandling.set("BufferedReader");
 		String fullmessage = "", message = "";
-		while (!(message = in.readLine()).isEmpty()) {
+		for(message = in.readLine(); message != null && !message.equals(endOfMessage); message = in.readLine()) {
 			fullmessage += message;
 		}
 		return JsonParser._parseObjectFromString(fullmessage);
