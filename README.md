@@ -57,7 +57,7 @@ Add this to your `pom.xml` file:
 		<dependency>
 			<groupId>pixelguys.json</groupId>
 			<artifactId>trivial-json</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 ```
 #### other
